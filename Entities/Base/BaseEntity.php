@@ -42,26 +42,56 @@
         
         #endregion
 
-         #region "Método para mapear as informações de vários itens da base para o modelo"
+        #region "Método para mapear as informações de vários itens da base para o modelo"
 
-         function MapToModels($Classe, $Array)
-         {
+        function MapToModels($Classe, $Array)
+        {
             foreach ($Classe->Dicionario() as $key => $value) 
             {
-                if($value["IndiceBase"] != "IMAGEM")
-                {
-                    $Executar = '$'. 'Classe->set' . $value['IndiceClass'] . '("'. $Array[$value['IndiceBase']] . '");';
-                    eval($Executar);
-                }
-                else
-                {
-                    $Classe->setImagem($Array[$value['IndiceBase']]);
-                }
-            }  
-             return $Classe;
-         }
+                $Executar = '$'. 'Classe->set' . $value['IndiceClass'] . '("'. $Array[$value['IndiceBase']] . '");';
+                eval($Executar);
+            } 
+            
+            return $Classe;
+        }
 
-         #endregion
+        #endregion
+
+        #region "Método para mapear as informações de um array para o modelo indicado"
+
+        function MapToClass($Class, $Array, $Tipo = "")
+        {
+            $Classe = get_class($Class);
+            $Classe = new $Class();
+
+            foreach ($Array as $Item => $ItemIndice)
+            {
+                foreach ($Classe->Dicionario() as $Indice) 
+                {
+                    if($Indice["IndiceClass"] == $Item)
+                    {
+                        if($Tipo == "")
+                        {
+                            $Executar = ("$". "Classe->set" . $Indice["IndiceClass"] . "('". addslashes($Array[$Item]) . "');" );
+                        }
+                        else 
+                        {
+                            $Executar = ("$". "Classe->set" . $Indice["IndiceClass"] . "('". addslashes($Array->$Item) . "');" );
+                        }
+                        eval($Executar);
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }             
+            }
+
+            return $Classe;
+        }
+
+        #endregion
     }
 
 ?>

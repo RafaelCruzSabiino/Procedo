@@ -9,22 +9,22 @@
     {
         #region "Propriedades"
 
-        public int    $Codigo;
-        public string $Nome;
-        public string $Email;
-        public string $Senha;
-        public string $Criptografia;
-        public string $Sexo;
-        public string $Telefone;
-        public int    $Cidade;
-        public int    $Estado;
-        public int    $Situacao;
+        public  $Codigo;
+        public  $Nome;
+        public  $Email;
+        public  $Senha;
+        public  $Criptografia;
+        public  $Sexo;
+        public  $Telefone;
+        public  $Cidade;
+        public  $Estado;
+        public  $Situacao;
 
         #endregion
 
         #region "Construtor"
 
-        public function __construct()
+        public function __construct($Codigo=0,$Nome="",$Email="",$Senha="",$Criptografia="",$Sexo="",$Telefone="",$Cidade="",$Estado="",$Situacao="")
         {
             $this->Codigo       = $Codigo;
             $this->Nome         = $Nome;

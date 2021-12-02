@@ -6,20 +6,48 @@
     #region "Inclusao de todas as paginas necessarias"
 
     require_once("Base/BaseController.php");
-    require_once("../Entities/Usuario.php");
-    require_once("../DAO/TB_PRJ_0001_DAO.php");
+    require_once("../../Entities/Usuario.php");
+    require_once("../../BusinessObject/UsuarioBo.php");
 
     #endregion
 
     class AutentificarController extends BaseController
     {
-        private $Dao;
+        public $Entity;
+        public $Bo;
 
         #region "Metodo Construtor"
 
         function __construct()
         {
-            parent::__construct();    
+            parent::__construct(); 
+            $this->Bo     = new UsuarioBo();
+            $this->Entity = new Usuario();
+        }
+
+        #endregion
+
+        #region "Metodo Para Validar o Login"
+
+        public function ValidarLogin()
+        {            
+            $_POST["Email"]        = $this->AntiSqlInjector($_POST["Email"]);   
+            $_POST["Criptografia"] = md5($this->AntiSqlInjector($_POST["Senha"]));  
+
+            $modelo = $this->Entity->MapToClass($this->Entity, $_POST);            
+            $ret    = $this->Bo->ValidarLogin($modelo);
+
+            if(!$ret->getErro())
+            {
+                if(!empty(!$ret->getItem()))
+                    $this->Redirecionar("");
+                else
+                    $this->Redirecionar("Login");
+            }
+            else
+            {
+                $this->Redirecionar("Login");
+            }
         }
 
         #endregion

@@ -9,21 +9,21 @@
     {
         #region "Propriedades"
 
-        public int    $Codigo;
-        public string $Nome;
-        public string $Email;
-        public string $Documento;
-        public string $Telefone;
-        public int    $Cidade;
-        public int    $Estado;
-        public int    $Situacao;
-        public string $Observacao;
+        public $Codigo;
+        public $Nome;
+        public $Email;
+        public $Documento;
+        public $Telefone;
+        public $Cidade;
+        public $Estado;
+        public $Situacao;
+        public $Observacao;
 
         #endregion
 
         #region "Construtor"
 
-        public function __construct()
+        public function __construct($Codigo=0,$Nome="",$Email="",$Documento="",$Telefone="",$Cidade=0,$Estado=0,$Situacao="",$Observacao="")
         {
             $this->Codigo     = $Codigo;
             $this->Nome       = $Nome;

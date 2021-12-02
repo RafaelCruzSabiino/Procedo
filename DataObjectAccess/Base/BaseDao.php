@@ -47,13 +47,14 @@
             {    
                 $Item = $Modelo->MapToModel($Modelo, $Info[0]);
             }
-            return 
-                array(                        
-                        "Item"      => $Item,
-                        "Items"     => "",
-                        "RowCount"  => $this->Qry->rowCount(),
-                        "Mensagem"  =>  $this->Qry->rowCount() > 0 ? "Informação encontrada" : "Informação não encontrada"
-                    );            
+
+            return $Item;
+                //array(                        
+                //        "Item"      => $Item,
+                //        "Items"     => "",
+                //        "RowCount"  => $this->Qry->rowCount(),
+                //        "Erro"      => $this->Qry->rowCount() > 0 ? false : true                  
+                //    );            
         }
 
         #endregion
@@ -73,13 +74,14 @@
                 array_push($Items, $Item);
             }
 
-            return
-                array(                        
-                    "Item"      => "",
-                    "Items"     => $Items,
-                    "RowCount"  =>  $this->Qry->rowCount(),
-                    "Mensagem"  =>  $this->Qry->rowCount() > 0 ? "Informação encontrada" : "Informação não encontrada"
-                ); 
+            return $Items;
+                //array(                        
+                //    "Item"      => "",
+                //    "Items"     => $Items,
+                //    "RowCount"  => $this->Qry->rowCount(),
+                //    "Mensagem"  => $this->Qry->rowCount() > 0 ? "Informação encontrada" : "Informação não encontrada",
+                //    "Erro"      => $this->Qry->rowCount() > 0 ? false : true           
+                //); 
         }
 
         #endregion

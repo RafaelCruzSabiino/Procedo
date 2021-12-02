@@ -22,7 +22,7 @@
         public function Redirecionar($Page="")
         {
             $Page = $Page != "" ? $Page : $_GET['Page'];
-            eval("Header('Location: ../Views/" . $Page . ".php');");
+            eval("Header('Location: ../../Views/" . $Page . ".php');");
             exit;
         }
 
