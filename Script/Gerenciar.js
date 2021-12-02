@@ -1,0 +1,1 @@
+window.open("Controllers/Base/Gerenciar.php", "_self");
