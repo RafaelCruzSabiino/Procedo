@@ -29,7 +29,7 @@ $("#Nome, #Email, #Senha, #ConfirmarSenha, #Sexo, #Telefone, #Estado, #Cidade").
     }
 });
 
-function ValidarFormulario(){
+function ValidarUsuario(){
     if(Usuario.Nome == ""){
         Usuario.MensagemError = "Por favor Inserir seu Nome";
         return false
@@ -40,7 +40,7 @@ function ValidarFormulario(){
         return false;
     }
 
-    if(Usuario.Senha == "" || Usuario.Confirm == "" || Usuario.Senha !=  Usuario.Confirm){
+    if(!ValidarSenha(Usuario.Senha, Usuario.Confirm)){
         Usuario.MensagemError = "Senha está Incorreta!";
         return false;
     }
@@ -64,7 +64,7 @@ function ValidarFormulario(){
 };
 
 $("#CadastrarUsuario").on("click", function(){
-    if(ValidarFormulario()){
+    if(ValidarUsuario()){
         dados = JSON.stringify(Usuario);
         $.post(
             "../Controllers/Base/Gerenciar.php?Controller=UsuarioController&Funcao=InserirUsuario",{

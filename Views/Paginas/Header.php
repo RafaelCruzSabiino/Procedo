@@ -33,12 +33,12 @@
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="Cliente.php">Cliente</a></li>
-                        <li><a href="Usuario">Usuario</a></li>
+                        <li><a href="Usuario.php">Usuario</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-sm-7">
-                <h5 style="padding-top: 8px;">Bem Vindo <?= $_SESSION["UserName"] ?></h5>
+                <h5 style="padding-top: 8px;">Bem Vindo <b><?= $_SESSION["UserName"] ?></b></h5>
             </div>
         </nav>
 

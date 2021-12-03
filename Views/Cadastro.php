@@ -11,6 +11,14 @@
         <div class="container" style="padding-top: 55px;">
             <h1 class="text-center">Cadastro</h1>
             <br>
+            <div class="row" style="display: none;" id="ErrorResponseCadastro">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                    <label style="color: red;" id="labelErrorResponse"></label>                                         
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+            <br>
             <div class="row">
                 <div class="col-sm-4"></div>
                 <div class="col-sm-4">               
@@ -33,7 +41,8 @@
                 <div class="col-sm-4"></div>
                 <div class="col-sm-4">               
                     <label>Senha:</label>                        
-                    <input type="password" name="Senha" id="Senha" class="form-control" placeholder="*********">                            
+                    <input type="password" name="Senha" id="Senha" class="form-control" placeholder="*********">      
+                    <span>No Mínimo: 8 Caracteres, 1 Letra Maiúsculas, 1 Letra Minúscula</span>                      
                 </div>
                 <div class="col-sm-4"></div>
             </div>               
@@ -50,7 +59,7 @@
             <div class="row">
                 <div class="col-sm-4"></div>
                 <div class="col-sm-4">               
-                    <label>Sexo:</label>                      
+                    <label>Sexo: </label>
                     <select name="Sexo" id="Sexo" class="form-control" required="required">
                         <option value="#">Selecione</option>
                         <option value="M">Masculino</option>
@@ -84,14 +93,6 @@
                 <div class="col-sm-4"></div>
             </div>              
             <br>
-            <div class="row" style="display: none;" id="ErrorResponseCadastro">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-4">
-                    <label style="color: red;" id="labelErrorResponse"></label>                                         
-                </div>
-                <div class="col-sm-4"></div>
-            </div>
-            <br>
             <div class="row">
                 <div class="col-sm-4"></div>
                 <div class="col-sm-2">               
@@ -105,7 +106,8 @@
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>      
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="http://xregexp.com/v/3.0.0/xregexp-all-min.js"></script>      
         <script src="../Script/Common/EstadoCidade.js"></script>
         <script src="../Script/Common/Mascara.js"></script>
         <script src="../Script/Common/Validacao.js"></script>
