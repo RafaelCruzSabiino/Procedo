@@ -41,7 +41,7 @@
             {
                 $_SESSION["UserCodigo"]    = $ret->getItem()->getCodigo();
                 $_SESSION["UserName"]      = $ret->getItem()->getNome();
-                $this->Redirecionar("Tetste");
+                $this->Redirecionar("Paginas/Cliente");
             }
             else
             {
