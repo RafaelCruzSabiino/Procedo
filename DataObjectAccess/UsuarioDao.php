@@ -40,7 +40,7 @@
             }
             catch(PDOException $e)
             {
-                throw new PDOException($e);
+                throw new Exception($e);
             }
 
             return $ret;

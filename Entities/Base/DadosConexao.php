@@ -19,9 +19,9 @@
 
         public function __construct()
         {
-            $this->User = "localhost"; 
+            $this->User = "root"; 
             $this->Pass = "rfc@1001";
-            $this->Host = "root";
+            $this->Host = "localhost";
             $this->Base = "PROCEDO";
         }
 

@@ -39,13 +39,14 @@
 
             if(!$ret->getErro())
             {
-                if(!empty(!$ret->getItem()))
-                    $this->Redirecionar("");
-                else
-                    $this->Redirecionar("Login");
+                $_SESSION["ErrorResponse"] = "";
+                $_SESSION["UserCodigo"]    = $ret->getItem()->getCodigo();
+                $_SESSION["UserName"]      = $ret->getItem()->getNome();
+                $this->Redirecionar("");
             }
             else
             {
+                $_SESSION["ErrorResponse"] = $ret->getMensagem();
                 $this->Redirecionar("Login");
             }
         }

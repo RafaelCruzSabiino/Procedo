@@ -32,6 +32,12 @@
             try
             {     
                 $this->ResultInfo->setItem($this->Dao->ValidarLogin($modelo));
+
+                if(empty($this->ResultInfo->getItem()))
+                {
+                    $this->ResultInfo->setErro(true);   
+                    $this->ResultInfo->setMensagem("Usuário Não Encontrado!");                   
+                }
             }
             catch (Exception $e)
             {

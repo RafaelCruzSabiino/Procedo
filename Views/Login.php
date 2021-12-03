@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 
 <!DOCTYPE html>
 <html lang="pt-bt">
@@ -30,6 +33,16 @@
                     </div>
                     <div class="col-sm-4"></div>
                 </div>
+                <?php if(!empty($_SESSION["ErrorResponse"])) { ?>
+                <br>
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4">
+                        <label style="color: red;"><?= $_SESSION["ErrorResponse"] ?></label>                                         
+                    </div>
+                    <div class="col-sm-4"></div>
+                </div>
+                <?php } ?>
                 <br>
                 <div class="row">
                     <div class="col-sm-4"></div>
@@ -48,6 +61,18 @@
             <br>
             <form method="POST" action="../Controllers/Base/Gerenciar.php?Controller=AutentificarController&Funcao=InserirUsuario">
                 
+            
+                <br>
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-2">               
+                        <button type="button" class="btn btn-dafault" id="LoginUser">Voltar Login</button>    
+                    </div>
+                    <div class="col-sm-2" style="text-align: right;">               
+                        <button type="submit" class="btn btn-primary">Cadastrar</button>            
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
             </form>
         </div>
 
