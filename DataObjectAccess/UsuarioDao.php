@@ -1,6 +1,6 @@
 <?php
     /*<sumary>
-        Essa Pagina é responsável pela controle do objeto Usuario
+        Essa Pagina é responsável pela conexao com o banco para o Usuario
     </sumary>*/
 
     #region "Inclusao de todas as paginas necessarias"

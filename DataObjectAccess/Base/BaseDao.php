@@ -70,7 +70,7 @@
             {
                 $Classe = get_class($Modelo);
                 $Modelo = new $Classe();
-                $Item   = $Modelo->MapToModels($Modelo, $Info[$i]);
+                $Item   = $Modelo->MapToModel($Modelo, $Info[$i]);
                 array_push($Items, $Item);
             }
 

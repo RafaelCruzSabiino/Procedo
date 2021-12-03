@@ -32,17 +32,16 @@
         public function ValidarLogin()
         {            
             $_POST["Email"]        = $this->AntiSqlInjector($_POST["Email"]);   
-            $_POST["Criptografia"] = md5($this->AntiSqlInjector($_POST["Senha"]));  
+            $_POST["Criptografia"] = md5($this->AntiSqlInjector($_POST["Senha"])); 
 
             $modelo = $this->Entity->MapToClass($this->Entity, $_POST);            
             $ret    = $this->Bo->ValidarLogin($modelo);
 
             if(!$ret->getErro())
             {
-                $_SESSION["ErrorResponse"] = "";
                 $_SESSION["UserCodigo"]    = $ret->getItem()->getCodigo();
                 $_SESSION["UserName"]      = $ret->getItem()->getNome();
-                $this->Redirecionar("");
+                $this->Redirecionar("Tetste");
             }
             else
             {
