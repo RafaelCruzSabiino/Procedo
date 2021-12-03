@@ -2,11 +2,10 @@ function GetEstados(){
     $.post(
             "../Controllers/Base/Gerenciar.php?Controller=EstadoCidadeController&Funcao=GetEstado",{
             }, function(data){
-                debugger;
                 Info = JSON.parse(data);
                 if(!Info.Erro){
                     $("#Estado").html("");
-                    $("#Estado").append("<option value='#'>Selecione</option>");
+                    $("#Estado").append("<option value=''>Selecione</option>");
                     for(var i=0; i < Info.Itens.length; i++){
                         $("#Estado").append("<option value='" + Info.Itens[i].Codigo + "'>" + Info.Itens[i].Sigla + "</option>");
                     }
@@ -21,7 +20,6 @@ function GetEstados(){
 }
 
 function GetCidade(estado){
-    debugger;
     if(estado == null){
         estado = 0;
     }
@@ -33,7 +31,7 @@ function GetCidade(estado){
             Info = JSON.parse(data);
             if(!Info.Erro){
                 $("#Cidade").html("");
-                $("#Cidade").append("<option value='#'>Selecione</option>");
+                $("#Cidade").append("<option value=''>Selecione</option>");
                 for(var i=0; i < Info.Itens.length; i++){
                     $("#Cidade").append("<option value='" + Info.Itens[i].Codigo + "'>" + Info.Itens[i].Nome + "</option>");
                 }

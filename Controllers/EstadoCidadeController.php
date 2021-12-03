@@ -30,7 +30,7 @@
 
         #region "Metodo Para pegar os Estados"
 
-        function GetEstado()
+        public function GetEstado()
         {
             echo json_encode($this->Bo->GetEstado($this->EstadoEntity));
         }
@@ -39,7 +39,7 @@
 
         #region "Metodo Para pegar as Cidades"
 
-        function GetCidade()
+        public function GetCidade()
         {
             $modelo = $this->CidadeEntity->MapToClass($this->CidadeEntity, $_POST);
 
