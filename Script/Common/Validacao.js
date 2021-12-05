@@ -23,17 +23,20 @@ function SomenteNumero(e) {
 
 function ValidarEmail(email){
     if(email == "" || email.indexOf("@") == -1 || email.split('@')[1].indexOf(".") == -1){
-        return false
-    }//else{
-        //$.get(
-                //"https://api.hunter.io/v2/email-verifier?email=" + email + "&api_key=838f1852ed755b445253132ca98aaeb81fff1c6f",{
-                //},
-                //function(data){
-                    //debugger;
-                    //Data = data;
-                //}
-             //);
-    //}
+        return false;
+    }
+
+    //$.ajax({
+        //url: "https://api.hunter.io/v2/email-verifier?email=" + email + "&api_key=838f1852ed755b445253132ca98aaeb81fff1c6f",                
+        //type: 'GET',
+        //success:function(info){
+            //if(info != null && info.data.webmail){
+                //return true;
+            //}else{
+                //return false;
+            //}
+        //}
+    //});  
 
     return true;
 };

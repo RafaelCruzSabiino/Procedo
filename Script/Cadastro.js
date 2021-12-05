@@ -35,8 +35,8 @@ function ValidarUsuario(){
         return false
     }
 
-    if(!ValidarEmail(Usuario.Email)){   
-        Usuario.MensagemError = "Por favor Informe um E-mail Valido";
+    if(!ValidarEmail(Usuario.Email)){ 
+        Usuario.MensagemError = "Por favor Informe um E-mail Válido";
         return false;
     }
 
@@ -70,7 +70,6 @@ $("#CadastrarUsuario").on("click", function(){
             "../Controllers/Base/Gerenciar.php?Controller=UsuarioController&Funcao=InserirUsuario",{
                 Dados : dados
             }, function(data){
-                debugger;
                 Info = JSON.parse(data);
                 if(!Info.Erro){
                    window.location = 'Login.php';
