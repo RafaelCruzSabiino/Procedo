@@ -11,7 +11,8 @@ function GetEstados(idEstado, idCidade){
                     for(var i=0; i < Info.Itens.length; i++){
                         $("#" + idEstado).append("<option value='" + Info.Itens[i].Codigo + "'>" + Info.Itens[i].Sigla + "</option>");
                     }
-
+                    $("#" + idEstado).select2();
+                    
                     GetCidade(null, idCidade);
                 }
                 else{
@@ -36,7 +37,8 @@ function GetCidade(estado, idCidade){
                 $("#" + idCidade).append("<option value=''>Selecione</option>");
                 for(var i=0; i < Info.Itens.length; i++){
                     $("#" + idCidade).append("<option value='" + Info.Itens[i].Codigo + "'>" + Info.Itens[i].Nome + "</option>");
-                }
+                }                
+                $("#" + idCidade).select2();
             }
             else{
                 alert("Erro: " + Info.Mensagem);
