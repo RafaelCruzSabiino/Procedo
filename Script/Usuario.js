@@ -2,9 +2,22 @@ $(document).ready(function(){
     ListarUsuario();
 });
 
-function ListarUsuario(){    
+function ListarUsuario(){   
+    Usuario.Nome     = $("#NomeFiltro").val();
+    Usuario.Estado   = $("#EstadoFiltro").val();
+    Usuario.Cidade   = $("#CidadeFiltro").val();
+    Usuario.Situacao = $("#SituacaoFiltro").val();
+
+    if ($.fn.dataTable.isDataTable("#table-usuario")) {
+        $("#table-usuario").DataTable().destroy();
+    }
+
+    $('#table-usuario').DataTable({
+        language: LanguageDefault()
+    });    
+    
     $.post(
-        "../../Controllers/Base/Gerenciar.php?Controller=UsuarioController&Funcao=ListarUsuarios",{
+        "../Controllers/Base/Gerenciar.php?Controller=UsuarioController&Funcao=ListarUsuarios",{
             Dados: JSON.stringify(Usuario)
         },function(data){
             debugger;
@@ -26,15 +39,19 @@ function ListarUsuario(){
             }
         }
     );
-
-    $('#table-usuario').DataTable({
-        language: LanguageDefault()
-    });    
 };
 
-function LimparFiltros(){
-    Usuario.Estado   = "";
-    Usuario.Cidade   = "";
-    Usuario.Nome     = "";
-    Usuario.Situacao = "";
-}
+function AplicarFiltro(css){
+    if(css != "none"){
+        $("#btnFiltrar").html("").append("Cancelar <i class='fa fa-times'></i>").removeClass("btn-primary").addClass("btn-danger").attr("onclick", "AplicarFiltro('none')");      
+    }else{
+        $("#btnFiltrar").html("").append("Filtros").removeClass("btn-danger").addClass("btn-primary").attr("onclick", "AplicarFiltro('block')");
+    }
+
+    if($("#EstadoFiltro").val() == null){
+        GetEstados('EstadoFiltro', 'CidadeFiltro');
+    }
+
+    $("#filtrosUsuario, #filtrarUsuario").css("display", css);
+};
+

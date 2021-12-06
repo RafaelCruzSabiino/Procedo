@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-bt">
     <head>
@@ -82,7 +86,7 @@
                 <div class="col-sm-4"></div>
                 <div class="col-sm-1">               
                     <label>Estado:</label>                   
-                    <select name="Estado" id="Estado" class="form-control" required="required">
+                    <select name="Estado" id="Estado" class="form-control" required="required" onchange="FiltrarCidade()">
                     </select>                                       
                 </div>
                 <div class="col-sm-3">               
@@ -95,8 +99,12 @@
             <br>
             <div class="row">
                 <div class="col-sm-4"></div>
-                <div class="col-sm-2">               
-                    <button type="button" class="btn btn-dafault" id="LoginUser">Voltar Login</button>    
+                <div class="col-sm-2">            
+                    <?php if(!isset($_SESSION["UserCodigo"])) { ?>   
+                        <button type="button" class="btn btn-dafault" onclick="window.location = 'Login.php'">Voltar Login</button> 
+                    <?php }else { ?>
+                        <button type="button" class="btn btn-dafault" onclick="window.location = 'Usuario.php'">Cancelar</button> 
+                    <?php } ?>   
                 </div>
                 <div class="col-sm-2" style="text-align: right;">               
                     <button type="button" class="btn btn-primary" id="CadastrarUsuario">Cadastrar</button>            

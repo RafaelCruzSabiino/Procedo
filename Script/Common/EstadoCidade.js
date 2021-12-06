@@ -1,16 +1,18 @@
-function GetEstados(){
+function GetEstados(idEstado, idCidade){
+    idEstado = idEstado != null ? idEstado : "Estado";
+    idCidade = idCidade != null ? idCidade : "Cidade";
     $.post(
             "../Controllers/Base/Gerenciar.php?Controller=EstadoCidadeController&Funcao=GetEstado",{
             }, function(data){
                 Info = JSON.parse(data);
                 if(!Info.Erro){
-                    $("#Estado").html("");
-                    $("#Estado").append("<option value=''>Selecione</option>");
+                    $("#" + idEstado).html("");
+                    $("#" + idEstado).append("<option value=''>Selecione</option>");
                     for(var i=0; i < Info.Itens.length; i++){
-                        $("#Estado").append("<option value='" + Info.Itens[i].Codigo + "'>" + Info.Itens[i].Sigla + "</option>");
+                        $("#" + idEstado).append("<option value='" + Info.Itens[i].Codigo + "'>" + Info.Itens[i].Sigla + "</option>");
                     }
 
-                    GetCidade();
+                    GetCidade(null, idCidade);
                 }
                 else{
                     alert("Erro: " + Info.Mensagem);
@@ -19,7 +21,7 @@ function GetEstados(){
         );
 }
 
-function GetCidade(estado){
+function GetCidade(estado, idCidade){
     if(estado == null){
         estado = 0;
     }
@@ -30,10 +32,10 @@ function GetCidade(estado){
         }, function(data){
             Info = JSON.parse(data);
             if(!Info.Erro){
-                $("#Cidade").html("");
-                $("#Cidade").append("<option value=''>Selecione</option>");
+                $("#" + idCidade).html("");
+                $("#" + idCidade).append("<option value=''>Selecione</option>");
                 for(var i=0; i < Info.Itens.length; i++){
-                    $("#Cidade").append("<option value='" + Info.Itens[i].Codigo + "'>" + Info.Itens[i].Nome + "</option>");
+                    $("#" + idCidade).append("<option value='" + Info.Itens[i].Codigo + "'>" + Info.Itens[i].Nome + "</option>");
                 }
             }
             else{
@@ -43,7 +45,9 @@ function GetCidade(estado){
     );
 }
 
-$("#Estado").on("change", function(){
-    GetCidade($(this).val() != "#" ? $(this).val() : null);
-    $("#Cidade").focus();
-});
+function FiltrarCidade(idEstado, idCidade){
+    idEstado = idEstado != null ? idEstado : "Estado";
+    idCidade = idCidade != null ? idCidade : "Cidade";
+    GetCidade(($("#" + idEstado).val() != "#" ? $("#" + idEstado).val() : null), idCidade);
+    $("#" + idCidade).focus();
+}
