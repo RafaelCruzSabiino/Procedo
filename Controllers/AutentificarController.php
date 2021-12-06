@@ -51,5 +51,16 @@
         }
 
         #endregion
+
+        #region "Metodo para fazer o logout do usuario"
+
+        public function LogOut()
+        {
+            session_reset();
+            session_destroy();
+            $this->Redirecionar("Login");
+        }
+        
+        #endregion
     }
 ?>

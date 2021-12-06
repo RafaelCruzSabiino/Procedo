@@ -5,7 +5,7 @@
     {
       session_reset();
       session_destroy();
-      header("Location: ../../Controllers/Base/Gerenciar.php");
+      header("Location: ../Controllers/Base/Gerenciar.php");
     }
 ?>
 
@@ -39,11 +39,17 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-5">
                 <h5 style="padding-top: 8px;">Bem Vindo <b><?= $_SESSION["UserName"] ?></b></h5>
+            </div>
+            <div class="col-sm-2">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="../Controllers/Base/Gerenciar.php?Controller=AutentificarController&Funcao=LogOut">Sair</a></li>
+                </ul>
             </div>
         </nav>
 
+    
 
         
     
