@@ -27,7 +27,9 @@ function ListarUsuario(){
         }
     );
 
-    $('#table-usuario').DataTable();
+    $('#table-usuario').DataTable({
+        language: LanguageDefault()
+    });    
 };
 
 function LimparFiltros(){
