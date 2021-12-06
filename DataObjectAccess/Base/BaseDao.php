@@ -48,13 +48,7 @@
                 $Item = $Modelo->MapToModel($Modelo, $Info[0]);
             }
 
-            return $Item;
-                //array(                        
-                //        "Item"      => $Item,
-                //        "Items"     => "",
-                //        "RowCount"  => $this->Qry->rowCount(),
-                //        "Erro"      => $this->Qry->rowCount() > 0 ? false : true                  
-                //    );            
+            return $Item;      
         }
 
         #endregion
@@ -75,13 +69,15 @@
             }
 
             return $Items;
-                //array(                        
-                //    "Item"      => "",
-                //    "Items"     => $Items,
-                //    "RowCount"  => $this->Qry->rowCount(),
-                //    "Mensagem"  => $this->Qry->rowCount() > 0 ? "Informação encontrada" : "Informação não encontrada",
-                //    "Erro"      => $this->Qry->rowCount() > 0 ? false : true           
-                //); 
+        }
+
+        #endregion
+
+        #region "Método para trazer o return_value do banco"
+
+        protected function ReturnValue()
+        {
+            return $this->Qry->fecthAll(PDO::FETCH_ASSOC)[0]["RETURN_VALUE"];
         }
 
         #endregion

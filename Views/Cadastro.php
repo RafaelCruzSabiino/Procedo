@@ -112,5 +112,6 @@
         <script src="../Script/Common/Mascara.js"></script>
         <script src="../Script/Common/Validacao.js"></script>
         <script src="../Script/Cadastro.js"></script>
+        <script src="../Script/Modelos/Usuario.js"></script>
     </body>
 </html>

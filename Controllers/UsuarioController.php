@@ -41,6 +41,19 @@
 
         #endregion
 
+        #region "Listar Usuarios Conforme filtros"
+
+        public function ListarUsuarios()
+        {
+            $dados = json_decode($_POST["Dados"]);
+            
+            $modelo = $this->Entity->MapToClass($this->Entity, $dados, 1);
+
+            echo json_encode($this->Bo->ListarUsuarios($modelo));
+        }
+
+        #endregion
+
     }
 
 ?>

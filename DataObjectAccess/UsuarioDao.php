@@ -67,7 +67,7 @@
                 $this->Qry->bindValue(7, $modelo->getCidade());
                 $this->Qry->execute();
 
-                $ret = $this->Qry->fetchAll(PDO::FETCH_ASSOC)[0]["RETURN_VALUE"];
+                $ret = $this->ReturnValue();
                 $this->QryClose();
                 $this->FecharConexao();
             }
@@ -80,5 +80,36 @@
         }
 
         #endregion
+
+        #region "Metodo para Listar Usuarios conforme filtro"
+
+        public function ListarUsuarios($modelo)
+        {
+            $sql = "CALL PROCEDO_USUARIO_0005(?,?,?,?)";
+
+            try
+            {
+                $this->AbrirConexao();
+                $this->Qry = $this->Base->prepare($sql);
+                $this->Qry->bindValue(1, $modelo->getEstado()   == "" ? null : $modelo->getEstado());
+                $this->Qry->bindValue(2, $modelo->getCidade()   == "" ? null : $modelo->getCidade());
+                $this->Qry->bindValue(3, $modelo->getNome()     == "" ? null : $modelo->getNome());
+                $this->Qry->bindValue(4, $modelo->getSituacao() == "" ? null : $modelo->getSituacao());
+                $this->Qry->execute();
+
+                $ret = $this->BaseToModels($modelo);
+                $this->QryClose();
+                $this->FecharConexao();
+            }
+            catch(PDOException $e)
+            {
+                throw new Exception($e);
+            }
+
+            return $ret;
+        }
+
+        #endregion
+        
     }
 ?>

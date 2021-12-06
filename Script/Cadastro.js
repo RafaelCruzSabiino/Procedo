@@ -1,32 +1,5 @@
-Usuario = {
-    Nome:     "",
-    Email:    "",
-    Senha:    "",
-    Confirm:  "",
-    Sexo:     "",
-    Telefone: "",
-    Estado:   "",
-    Cidade:   ""
-};
-
 $(document).ready(function(){
     GetEstados();
-});
-
-$("#Nome, #Email, #Senha, #ConfirmarSenha, #Sexo, #Telefone, #Estado, #Cidade").on("blur", function(dados){
-    var campo = dados.target.id;
-    var value = dados.target.value;
-
-    switch(campo){
-        case "Nome"           : Usuario.Nome     = value; break;
-        case "Email"          : Usuario.Email    = value; break;
-        case "Senha"          : Usuario.Senha    = value; break;
-        case "ConfirmarSenha" : Usuario.Confirm  = value; break;
-        case "Sexo"           : Usuario.Sexo     = value; break;
-        case "Telefone"       : Usuario.Telefone = value; break;
-        case "Estado"         : Usuario.Estado   = value; break;
-        case "Cidade"         : Usuario.Cidade   = value; break;
-    }
 });
 
 function ValidarUsuario(){
@@ -65,10 +38,9 @@ function ValidarUsuario(){
 
 $("#CadastrarUsuario").on("click", function(){
     if(ValidarUsuario()){
-        dados = JSON.stringify(Usuario);
         $.post(
             "../Controllers/Base/Gerenciar.php?Controller=UsuarioController&Funcao=InserirUsuario",{
-                Dados : dados
+                Dados : JSON.stringify(Usuario)
             }, function(data){
                 Info = JSON.parse(data);
                 if(!Info.Erro){

@@ -90,5 +90,30 @@
         }
 
         #endregion
+
+        #region "Metodo Para Listar Usuario conforme filtros"
+
+        public function ListarUsuarios($modelo)
+        {
+            try
+            {    
+                $this->ResultInfo->setItens($this->Dao->ListarUsuarios($modelo));
+
+                if(empty($this->ResultInfo->getItens()))
+                {
+                    $this->ResultInfo->setErro(true);   
+                    $this->ResultInfo->setMensagem("Usuário Não Encontrado!");                   
+                }
+            }
+            catch (Exception $e)
+            {
+                $this->ResultInfo->setErro(true);
+                $this->ResultInfo->setMensagem($e->getMessage());
+            }
+
+            return $this->ResultInfo;
+        }
+
+        #endregion
     }
 ?>

@@ -33,7 +33,7 @@
             {     
                 $this->ResultInfo->setItens($this->Dao->GetEstado($modelo));
 
-                if(Count($this->ResultInfo->getItens()) <= 0)
+                if(empty($this->ResultInfo->getItens()))
                 {
                     $this->ResultInfo->setErro(true);   
                     $this->ResultInfo->setMensagem("Estados Não Encontrados!");                   
@@ -58,7 +58,7 @@
             {     
                 $this->ResultInfo->setItens($this->Dao->GetCidade($modelo));
 
-                if(Count($this->ResultInfo->getItens()) <= 0)
+                if(empty($this->ResultInfo->getItens()))
                 {
                     $this->ResultInfo->setErro(true);   
                     $this->ResultInfo->setMensagem("Estados Não Encontrados!");                   
