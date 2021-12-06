@@ -77,7 +77,7 @@
 
         protected function ReturnValue()
         {
-            return $this->Qry->fecthAll(PDO::FETCH_ASSOC)[0]["RETURN_VALUE"];
+            return $this->Qry->fetchAll(PDO::FETCH_ASSOC)[0]["RETURN_VALUE"];
         }
 
         #endregion

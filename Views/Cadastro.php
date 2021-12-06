@@ -65,7 +65,7 @@
                 <div class="col-sm-4">               
                     <label>Sexo: </label>
                     <select name="Sexo" id="Sexo" class="form-control" required="required">
-                        <option value="#">Selecione</option>
+                        <option value="">Selecione</option>
                         <option value="M">Masculino</option>
                         <option value="F">Feminino</option>
                     </select>                         
