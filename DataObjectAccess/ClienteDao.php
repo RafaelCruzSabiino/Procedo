@@ -52,6 +52,40 @@
 
         #endregion
 
+        #region "Metodo Para Alterar Cliente"
+
+        public function AlterarCliente($modelo)
+        {
+            $sql = "CALL PROCEDO_CLIENTE_0002(?,?,?,?,?,?,?,?)";
+
+            try
+            {
+                $this->AbrirConexao();
+                $this->Qry = $this->Base->prepare($sql);
+                $this->Qry->bindValue(1, $modelo->getCodigo());
+                $this->Qry->bindValue(2, $modelo->getNome());
+                $this->Qry->bindValue(3, $modelo->getEmail());
+                $this->Qry->bindValue(4, $modelo->getDocumento());
+                $this->Qry->bindValue(5, $modelo->getTelefone());
+                $this->Qry->bindValue(6, $modelo->getCidade());
+                $this->Qry->bindValue(7, $modelo->getSituacao());
+                $this->Qry->bindValue(8, $modelo->getObservacao());
+                $this->Qry->execute();
+
+                $ret = $this->ReturnValue();
+                $this->QryClose();
+                $this->FecharConexao();
+            }
+            catch(PDOException $e)
+            {
+                throw new Exception($e);
+            }
+
+            return $ret;
+        }
+
+        #endregion
+
         #region "Metodo Para Excluir Cliente"
 
         public function ExcluirCliente($codigo)
@@ -92,6 +126,33 @@
                 $this->Qry->execute();
 
                 $ret = $this->BaseToModels($modelo);
+                $this->QryClose();
+                $this->FecharConexao();
+            }
+            catch(PDOException $e)
+            {
+                throw new Exception($e);
+            }
+
+            return $ret;
+        }
+
+        #endregion
+        
+        #region "Buscar Cliente Expecifico"
+
+        public function GetCliente($modelo)
+        {
+            $sql = "CALL PROCEDO_CLIENTE_0004(?)";
+
+            try
+            {
+                $this->AbrirConexao();
+                $this->Qry = $this->Base->prepare($sql);
+                $this->Qry->bindValue(1, $modelo->getCodigo());
+                $this->Qry->execute();
+
+                $ret = $this->BaseToModel($modelo);
                 $this->QryClose();
                 $this->FecharConexao();
             }

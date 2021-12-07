@@ -28,7 +28,7 @@
         #region "Metodos para buscar as origens"
 
         public function SelecionarOrigem()
-        {                       
+        {                     
             echo json_encode($this->Bo->SelecionarOrigem($this->Entity));
         }
 

@@ -48,6 +48,60 @@
 
         #endregion
 
+        #region "Metodo para Excluir relação de origem conforme cliente"
+
+        public function ExcluirRelacaoOrigem($cliente)
+        {
+            $sql = "CALL PROCEDO_ORIGEM_0002(?)";
+
+            try
+            {
+                $this->AbrirConexao();
+                $this->Qry = $this->Base->prepare($sql);
+                $this->Qry->bindValue(1, $cliente);
+                $this->Qry->execute();
+
+                $ret = $this->ReturnValue();
+                $this->QryClose();
+                $this->FecharConexao();
+            }
+            catch(PDOException $e)
+            {
+                throw new Exception($e);
+            }
+
+            return $ret;
+        }
+
+        #endregion
+
+        #region "Metodo para Selecionar todas as origens Origens que o cliente possui"
+
+        public function SelecionarOrigemCliente($modelo)
+        {
+            $sql = "CALL PROCEDO_ORIGEM_0003(?)";
+
+            try
+            {
+                $this->AbrirConexao();
+                $this->Qry = $this->Base->prepare($sql);
+                $this->Qry->bindValue(1, $modelo->getCodigo());
+                $this->Qry->execute();
+
+                $ret = $this->BaseToModels($modelo);
+                $this->QryClose();
+                $this->FecharConexao();
+            }
+            catch(PDOException $e)
+            {
+                throw new Exception($e);
+            }
+
+            return $ret;
+        }
+
+        #endregion
+
         #region "Metodo para Selecionar todas as origens Origens"
 
         public function SelecionarOrigem($modelo)

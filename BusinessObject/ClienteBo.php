@@ -50,6 +50,31 @@
 
         #endregion
 
+        #region "Metodo Para Alterar Cliente"
+
+        public function AlterarCliente($modelo)
+        {
+            try
+            {    
+                $this->ResultInfo->setReturnInfo($this->Dao->AlterarCliente($modelo));
+
+                if(empty($this->ResultInfo->getReturnInfo()) || $this->ResultInfo->getReturnInfo() <= 0)
+                {
+                    $this->ResultInfo->setErro(true);   
+                    $this->ResultInfo->setMensagem("Erro ao Alterar Cliente!");                   
+                }
+            }
+            catch (Exception $e)
+            {
+                $this->ResultInfo->setErro(true);
+                $this->ResultInfo->setMensagem($e->getMessage());
+            }
+
+            return $this->ResultInfo;
+        }
+
+        #endregion
+
         #region "Metodo Para Excluir o Cliente"
 
         public function ExcluirCliente($codigo)
@@ -87,6 +112,31 @@
                 {
                     $this->ResultInfo->setErro(true);   
                     $this->ResultInfo->setMensagem("Nenhum Cliente Encontrado!");                   
+                }
+            }
+            catch (Exception $e)
+            {
+                $this->ResultInfo->setErro(true);
+                $this->ResultInfo->setMensagem($e->getMessage());
+            }
+
+            return $this->ResultInfo;
+        }
+
+        #endregion
+
+        #region "Metodo Para Buscar Cliente Expecifico"
+
+        public function GetCliente($modelo)
+        {
+            try
+            {    
+                $this->ResultInfo->setItem($this->Dao->GetCliente($modelo));
+
+                if(empty($this->ResultInfo->getItem()))
+                {
+                    $this->ResultInfo->setErro(true);   
+                    $this->ResultInfo->setMensagem("Cliente Não Encontrado!");                   
                 }
             }
             catch (Exception $e)

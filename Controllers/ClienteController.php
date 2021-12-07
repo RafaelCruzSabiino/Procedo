@@ -52,11 +52,35 @@
 
                     if($retOrigem->getErro()){
                         $this->Bo->ExcluirCliente($retCliente->getReturnInfo());
+
                         $retCliente->setErro(true);
-                        $retCliente->setMensagem("Erro ao Gravar a Origem!");
+                        $retCliente->setMensagem($retOrigem->getMensagem());
                         break;
                     }
                 }
+            }
+
+            echo json_encode($retCliente);
+        }
+
+        #endregion
+
+        #region "Metodo para Alterar o Cliente"
+
+        public function AlterarCliente()
+        {
+            $dados      = json_decode($_POST["Dados"]);            
+            $modelo     = $this->Entity->MapToClass($this->Entity, $dados, 1);                       
+            $retCliente = $this->Bo->AlterarCliente($modelo);
+
+            $this->OrigemBo->ExcluirRelacaoOrigem($modelo->getCodigo());
+
+            $this->OrigemEntity->setCliente($modelo->getCodigo());
+
+            for($i=0; $i < Count($dados->Origem); $i++)
+            {
+                $this->OrigemEntity->setCodigo($dados->Origem[$i]);                   
+                $this->OrigemBo->InserirRelacaoOrigem($this->OrigemEntity);
             }
 
             echo json_encode($retCliente);
@@ -89,13 +113,41 @@
                     array_push($dataRow, $ret->getItens()[$i]->Telefone);
                     array_push($dataRow, $ret->getItens()[$i]->Documento);
                     array_push($dataRow, ($ret->getItens()[$i]->Situacao == 1 ? "Ativo" : "Inativo"));
-                    array_push($dataRow, "<button type='button' class='btn btn-danger' onclick='SelecionarModalExcluir(". $ret->getItens()[$i]->Codigo .",\"". $ret->getItens()[$i]->Nome ."\")'><i class='fa fa-times'></i></button>");
+                    array_push($dataRow, "<button type='button' class='btn btn-primary' onclick='SelecionarModalAlterar(". $ret->getItens()[$i]->Codigo .")'><i class='fa fa-edit'></i></button> <button type='button' class='btn btn-danger' onclick='SelecionarModalExcluir(". $ret->getItens()[$i]->Codigo .",\"". $ret->getItens()[$i]->Nome ."\")'><i class='fa fa-times'></i></button>");
 
                     array_push($dataTable, $dataRow);
                 }
             }
 
             echo json_encode($dataTable);      
+        }
+
+        #endregion
+
+        #region "Buscar Cliente Expecifico"
+
+        public function GetCliente()
+        {          
+            $modelo = $this->Entity->MapToClass($this->Entity, $_POST);
+            $ret    = $this->Bo->GetCliente($modelo);
+
+            if(!$ret->getErro())
+            {
+                $this->OrigemEntity->setCodigo($ret->getItem()->Codigo);
+                $retOrigem = $this->OrigemBo->SelecionarOrigemCliente($this->OrigemEntity);
+
+                if($retOrigem->getErro())
+                {
+                    $ret->setErro(true);
+                    $ret->setMensagem($retOrigem->getMensagem());
+                }
+                else
+                {
+                    $ret->getItem()->setOrigem($retOrigem->getItens());
+                } 
+            }
+
+            echo json_encode($ret);
         }
 
         #endregion

@@ -18,13 +18,13 @@
         public $Estado;
         public $Situacao;
         public $Observacao;
-        public $TotalRegistro;
+        public $Origem;
 
         #endregion
 
         #region "Construtor"
 
-        public function __construct($Codigo=0,$Nome="",$Email="",$Documento="",$Telefone="",$Cidade=0,$Estado=0,$Situacao="",$Observacao="",$TotalRegistro=0)
+        public function __construct($Codigo=0,$Nome="",$Email="",$Documento="",$Telefone="",$Cidade=0,$Estado=0,$Situacao="",$Observacao="",$Origem="")
         {
             $this->Codigo        = $Codigo;
             $this->Nome          = $Nome;
@@ -35,7 +35,7 @@
             $this->Estado        = $Estado;
             $this->Situacao      = $Situacao;
             $this->Observacao    = $Observacao;
-            $this->TotalRegistro = $TotalRegistro;
+            $this->Origem        = $Origem;
             parent::__construct();
         }
 
@@ -52,7 +52,7 @@
         public function getEstado()        {   return $this->Estado;        }
         public function getSituacao()      {   return $this->Situacao;      }
         public function getObservacao()    {   return $this->Observacao;    }
-        public function getTotalRegistro() {   return $this->TotalRegistro; }
+        public function getOrigem()        {   return $this->Origem;        }
         
         #endregion
 
@@ -67,7 +67,7 @@
         public function setEstado($Estado)               {   $this->Estado        = $Estado;        }
         public function setSituacao($Situacao)           {   $this->Situacao      = $Situacao;      }
         public function setObservacao($Observacao)       {   $this->Observacao    = $Observacao;    }
-        public function setTotalRegistro($TotalRegistro) {   $this->TotalRegistro = $TotalRegistro; }
+        public function setOrigem($Origem)               {   $this->Origem        = $Origem;        }
 
         #endregion
 
@@ -87,7 +87,6 @@
                 , ["IndiceBase" => "ESTADO"    ,     "IndiceClass" => "Estado"        ]
                 , ["IndiceBase" => "SITUACAO"  ,     "IndiceClass" => "Situacao"      ]
                 , ["IndiceBase" => "OBSERVACAO",     "IndiceClass" => "Observacao"    ]
-                , ["IndiceBase" => "TOTAL_REGISTRO", "IndiceClass" => "TotalRegistro" ]
             );
         }
 

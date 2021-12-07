@@ -29,7 +29,116 @@
             <tbody>
             </tbody>
         </table>
-    </div>  
+    </div>
+    <br>  
+</div>
+
+<div class="modal fade" id="modal-alterar-cliente">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Alterar Cliente</h4>
+            </div>
+            <div class="modal-body"> 
+                <br>                              
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">               
+                        <label>Nome:</label>                        
+                        <input type="text" name="Nome" id="Nome" class="form-control" placeholder="Informe o Nome">                            
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>               
+                <br>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">               
+                        <label>Email:</label>                        
+                        <input type="email" name="Email" id="Email" class="form-control" placeholder="xxxx@xxxx.com">                            
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>               
+                <br>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">               
+                        <label>Cpf:</label>                        
+                        <input type="text" name="Documento" id="Documento" class="form-control" placeholder="111.111.111-11" onkeyup="MascaraCpf(this, event)" onkeypress="return SomenteNumero(event)" maxlength="14">                            
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>               
+                <br>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">               
+                        <label>Tefone:</label>                     
+                        <input type="Telefone" name="Telefone" id="Telefone" class="form-control" placeholder="(99) 99999-9999" onkeyup="MascaraTelefone(this, event)" onkeypress="return SomenteNumero(event)" maxlength="15">                    
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>              
+                <br>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-2">               
+                        <label>Estado:</label>                   
+                        <select name="Estado" id="Estado" class="form-control" required="required" onchange="FiltrarCidade()">
+                        </select>                                       
+                    </div>
+                    <div class="col-sm-6">               
+                        <label>Cidade:</label>                   
+                        <select name="Cidade" id="Cidade" class="form-control" required="required">
+                        </select>                                        
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>              
+                <br>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">               
+                        <label>Situação:</label>                   
+                        <select name="Situacao" id="Situacao" class="form-control" required="required">
+                            <option value="0">Inativo</option>
+                            <option value="1">Ativo</option>
+                        </select>                                       
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>  
+                <br>  
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">               
+                        <label>Origem:</label>                   
+                        <select name="Origem" id="Origem" class="form-control" required="required">
+                        </select>                                      
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div> 
+                <br>          
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">               
+                        <label>Observação: </label>
+                        <input type="text" name="Observacao" id="Observacao" class="form-control" placeholder="Sem Obs.">         
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+                <br>
+                <div class="row" style="display: none;" id="ErrorResponse">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">
+                        <label style="color: red;" id="labelErrorResponse"></label>                                         
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+                <br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Voltar</button>
+                <button type="button" class="btn btn-primary" onclick="AlterarCliente()">Confirmar</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="modal fade" id="modal-excluir-cliente">
@@ -65,3 +174,7 @@
 
 <script src="../Script/Cliente.js"></script>
 <script src="../Script/Modelos/Cliente.js"></script>
+<script src="../Script/Common/EstadoCidade.js"></script>
+<script src="../Script/Common/Validacao.js"></script>
+<script src="../Script/Common/Mascara.js"></script>
+<script src="../Script/Common/Origem.js"></script>
