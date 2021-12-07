@@ -59,9 +59,7 @@
 
         public function ExcluirUsuario()
         {
-            $codigo = $_POST["Codigo"];               
-                        
-            echo json_encode($this->Bo->ExcluirUsuario($codigo));
+            echo json_encode($this->Bo->ExcluirUsuario($_POST["Codigo"]));
         }
 
         #endregion

@@ -64,6 +64,15 @@
 
         #endregion
 
+        #region "Metodo para Excluir o Cliente"
+
+        public function ExcluirCliente()
+        {                                  
+            echo json_encode($this->Bo->ExcluirCliente($_POST["Codigo"]));
+        }
+
+        #endregion
+
         #region "Metodo para Listar os Clientes"
 
         public function ListarCliente()
