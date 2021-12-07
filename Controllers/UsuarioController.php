@@ -70,11 +70,27 @@
 
         public function ListarUsuarios()
         {
-            $dados = json_decode($_POST["Dados"]);
-            
-            $modelo = $this->Entity->MapToClass($this->Entity, $dados, 1);
+            $dados     = json_decode($_POST["Dados"]);            
+            $modelo    = $this->Entity->MapToClass($this->Entity, $dados, 1);
+            $ret       = $this->Bo->ListarUsuarios($modelo);
+            $dataTable = [];
 
-            echo json_encode($this->Bo->ListarUsuarios($modelo));
+            if(!$ret->getErro())
+            {                
+                for($i=0; $i < Count($ret->getItens()); $i++)
+                {
+                    $dataRow = [];
+                    array_push($dataRow, $ret->getItens()[$i]->Nome);
+                    array_push($dataRow, $ret->getItens()[$i]->Email);
+                    array_push($dataRow, $ret->getItens()[$i]->Telefone);
+                    array_push($dataRow, ($ret->getItens()[$i]->Situacao == 1 ? "Ativo" : "Inativo"));
+                    array_push($dataRow, "<button type='button' class='btn btn-primary' onclick='SelecionarModalAlterar(". $ret->getItens()[$i]->Codigo .")'><i class='fa fa-pencil-square-o'></i></button> <button type='button' class='btn btn-danger'  onclick='SelecionarModalExcluir(". $ret->getItens()[$i]->Codigo .",\"". $ret->getItens()[$i]->Nome ."\")'><i class='fa fa-times'></i></button>");
+
+                    array_push($dataTable, $dataRow);
+                }
+            }
+
+            echo json_encode($dataTable);
         }
 
         #endregion

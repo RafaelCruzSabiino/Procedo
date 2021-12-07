@@ -13,23 +13,28 @@
         <div class="col-sm-4"></div>
     </div>
     <br>
+    <br>
     <div class="table-responsive">
-        <table class="table table-hover" id="table-usuario">
+        <table class="table table-hover" id="table-cliente">
             <thead>
                 <tr>
                     <th>Nome</th>
                     <th>E-mail</th>
                     <th>Telefone</th>
+                    <th>CPF</th>
                     <th>Situação</th>
-                    <th>Opções</th>
+                    <th>Opção</th>
                 </tr>
             </thead>
             <tbody>
             </tbody>
         </table>
-    </div>    
+    </div>  
 </div>
 
 <?php
     include 'Footer.php';
 ?>
+
+<script src="../Script/Cliente.js"></script>
+<script src="../Script/Modelos/Cliente.js"></script>

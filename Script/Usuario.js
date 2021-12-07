@@ -28,32 +28,14 @@ function ListarUsuario(){
     }
 
     $('#table-usuario').DataTable({
+        ajax: {
+                url: "../Controllers/Base/Gerenciar.php?Controller=UsuarioController&Funcao=ListarUsuarios",
+                type: "POST",
+                data: { Dados: JSON.stringify(Usuario) },
+                dataSrc: ""
+            },
         language: LanguageDefault()
-    });    
-    
-    $.post(
-        "../Controllers/Base/Gerenciar.php?Controller=UsuarioController&Funcao=ListarUsuarios",{
-            Dados: JSON.stringify(Usuario)
-        },function(data){
-            debugger;
-            Info = JSON.parse(data);
-            if(!Info.Erro){
-                $("#table-usuario > tbody").html("");
-                for(var i=0; i < Info.Itens.length; i++){
-                    $("#table-usuario > tbody").append("<tr>" +
-                                                            "<td>" + Info.Itens[i].Nome     + "</td>" + 
-                                                            "<td>" + Info.Itens[i].Email    + "</td>" + 
-                                                            "<td>" + Info.Itens[i].Telefone + "</td>" +
-                                                            "<td>" + (Info.Itens[i].Situacao != 0 ? "Ativo" : "Inativo") + "</td>" +
-                                                            "<td>" +
-                                                            "   <button type='button' class='btn btn-primary' onclick='SelecionarModalAlterar("+ Info.Itens[i].Codigo +")'><i class='fa fa-pencil-square-o'></i></button>" +
-                                                            "   <button type='button' class='btn btn-danger'  onclick='SelecionarModalExcluir("+ Info.Itens[i].Codigo +",\""+ Info.Itens[i].Nome +"\")'><i class='fa fa-times'></i></button>" + 
-                                                            "</td>" +  
-                                                       "</tr>");
-                }                
-            }
-        }
-    );
+    }); 
 };
 
 function GetUsuario(){

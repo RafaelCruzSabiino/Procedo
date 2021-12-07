@@ -78,6 +78,32 @@
         }
 
         #endregion
+
+        #region "Metodo Para Listar os Clientes"
+
+        public function ListarCliente($modelo)
+        {
+            $sql = "CALL PROCEDO_CLIENTE_0005()";
+
+            try
+            {
+                $this->AbrirConexao();
+                $this->Qry = $this->Base->prepare($sql);
+                $this->Qry->execute();
+
+                $ret = $this->BaseToModels($modelo);
+                $this->QryClose();
+                $this->FecharConexao();
+            }
+            catch(PDOException $e)
+            {
+                throw new Exception($e);
+            }
+
+            return $ret;
+        }
+
+        #endregion
     }
 
 ?>

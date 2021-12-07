@@ -74,6 +74,31 @@
         }
 
         #endregion
+
+        #region "Metodo Para Listar os Clientes"
+
+        public function ListarCliente($modelo)
+        {
+            try
+            {    
+                $this->ResultInfo->setItens($this->Dao->ListarCliente($modelo));
+
+                if(empty($this->ResultInfo->getItens()))
+                {
+                    $this->ResultInfo->setErro(true);   
+                    $this->ResultInfo->setMensagem("Nenhum Cliente Encontrado!");                   
+                }
+            }
+            catch (Exception $e)
+            {
+                $this->ResultInfo->setErro(true);
+                $this->ResultInfo->setMensagem($e->getMessage());
+            }
+
+            return $this->ResultInfo;
+        }
+
+        #endregion
     }
 
 ?>
