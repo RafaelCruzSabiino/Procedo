@@ -11,7 +11,7 @@ Cliente = {
     Origem:     ""
 };
 
-$("#Nome, #Email, #Documento, #Telefone, #Estado, #Cidade, #Situacao, #Observacao, #Origem").on("blur", function(dados){
+$("#Nome, #Email, #Documento, #Telefone, #Estado, #Cidade, #Situacao, #Observacao").on("blur", function(dados){
     var campo = dados.target.id;
     var value = dados.target.value;
 
@@ -24,7 +24,6 @@ $("#Nome, #Email, #Documento, #Telefone, #Estado, #Cidade, #Situacao, #Observaca
         case "Cidade"         : Cliente.Cidade     = value; break;
         case "Situacao"       : Cliente.Situacao   = value; break;
         case "Observacao"     : Cliente.Observacao = value; break;
-        case "Origem"         : Cliente.Origem     = value; break;
     }
 });
 
@@ -34,7 +33,7 @@ function ValidarCliente(){
         return false
     }
 
-    if(!ValidarEmail(Cliente.Email)){ 
+    if(!ValidarEmailFormato(Cliente.Email)){ 
         Cliente.MensagemError = "Por favor Informe um E-mail Válido";
         return false;
     }

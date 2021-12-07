@@ -3,14 +3,7 @@
 ?>
 
 <div class="container">
-    <h1 class="text-center">Cadastro de Cliente</h1>
-    <div class="row" style="display: none;" id="ErrorResponse">
-        <div class="col-sm-4"></div>
-        <div class="col-sm-4">
-            <label style="color: red;" id="labelErrorResponse"></label>                                         
-        </div>
-        <div class="col-sm-4"></div>
-    </div>    
+    <h1 class="text-center">Cadastro de Cliente</h1> 
     <br>
     <div class="row">
         <div class="col-sm-4"></div>
@@ -34,7 +27,7 @@
         <div class="col-sm-4"></div>
         <div class="col-sm-4">               
             <label>Cpf:</label>                        
-            <input type="text" name="Documento" id="Documento" class="form-control" placeholder="111.111.111-11" onkeypress="return SomenteNumero(event)" maxlength="14">      
+            <input type="text" name="Documento" id="Documento" class="form-control" placeholder="111.111.111-11" onkeyup="MascaraCpf(this, event)" onkeypress="return SomenteNumero(event)" maxlength="14">      
         </div>
         <div class="col-sm-4"></div>
     </div>                             
@@ -43,7 +36,7 @@
         <div class="col-sm-4"></div>
         <div class="col-sm-4">               
             <label>Tefone:</label>                     
-            <input type="Telefone" name="Telefone" id="Telefone" class="form-control" placeholder="(99) 99999-9999" onkeyup="MascaraTelefone(this, event)" onkeypress="return SomenteNumero(event)" maxlength="15">                    
+            <input type="text" name="Telefone" id="Telefone" class="form-control" placeholder="(99) 99999-9999" onkeyup="MascaraTelefone(this, event)" onkeypress="return SomenteNumero(event)" maxlength="15">                    
         </div>
         <div class="col-sm-4"></div>
     </div>              
@@ -71,7 +64,35 @@
             </select>                                      
         </div>
         <div class="col-sm-4"></div>
-    </div>             
+    </div> 
+    <br>
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">               
+            <label>Observação:</label>                     
+            <input type="text" name="Observacao" id="Observacao" class="form-control" placeholder="Sem Obs">                    
+        </div>
+        <div class="col-sm-4"></div>
+    </div>              
+    <br>
+    <div class="row" style="display: none;" id="ErrorResponse">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <label style="color: red;" id="labelErrorResponse"></label>                                         
+        </div>
+        <div class="col-sm-4"></div>
+    </div>   
+    <br>
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-2">            
+            <button type="button" class="btn btn-dafault" onclick="window.location = 'Cliente.php'">Cancelar</button> 
+        </div>
+        <div class="col-sm-2" style="text-align: right;">               
+            <button type="button" class="btn btn-primary" id="CadastrarCliente">Cadastrar</button>            
+        </div>
+        <div class="col-sm-4"></div>
+    </div>            
     <br>
 </div>
 
@@ -79,7 +100,7 @@
     include 'Footer.php';
 ?>
 
-<script src="../Script/Cliente.js"></script>
+<script src="../Script/CadastroCliente.js"></script>
 <script src="../Script/Modelos/Cliente.js"></script>
 <script src="../Script/Common/EstadoCidade.js"></script>
 <script src="../Script/Common/Validacao.js"></script>

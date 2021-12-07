@@ -1,6 +1,6 @@
 <?php
     /*<sumary>
-        Essa Pagina é responsável pela conexao com o banco para as ORIGENS
+        Essa Pagina é responsável pela conexao com o banco para o Cliente
     </sumary>*/
 
     #region "Inclusao de todas as paginas necessarias"
@@ -9,7 +9,7 @@
 
     #endregion
 
-    class OrigemDao extends BaseDao
+    class ClienteDao extends BaseDao
     {
         #region "Metodo Construtor"
 
@@ -20,18 +20,22 @@
 
         #endregion
 
-        #region "Metodo para Inserir relação de origem"
+        #region "Metodo Para Inserir Cliente"
 
-        public function InserirRelacaoOrigem($modelo)
+        public function InserirCliente($modelo)
         {
-            $sql = "CALL PROCEDO_ORIGEM_0001(?,?)";
+            $sql = "CALL PROCEDO_CLIENTE_0001(?,?,?,?,?,?)";
 
             try
             {
                 $this->AbrirConexao();
                 $this->Qry = $this->Base->prepare($sql);
-                $this->Qry->bindValue(1, $modelo->getCliente());
-                $this->Qry->bindValue(2, $modelo->getCodigo());
+                $this->Qry->bindValue(1, $modelo->getNome());
+                $this->Qry->bindValue(2, $modelo->getEmail());
+                $this->Qry->bindValue(3, $modelo->getDocumento());
+                $this->Qry->bindValue(4, $modelo->getTelefone());
+                $this->Qry->bindValue(5, $modelo->getCidade());
+                $this->Qry->bindValue(6, $modelo->getObservacao());
                 $this->Qry->execute();
 
                 $ret = $this->ReturnValue();
@@ -48,19 +52,20 @@
 
         #endregion
 
-        #region "Metodo para Selecionar todas as origens Origens"
+        #region "Metodo Para Excluir Cliente"
 
-        public function SelecionarOrigem($modelo)
+        public function ExcluirCliente($codigo)
         {
-            $sql = "CALL PROCEDO_ORIGEM_0004()";
+            $sql = "CALL PROCEDO_CLIENTE_0003(?)";
 
             try
             {
                 $this->AbrirConexao();
                 $this->Qry = $this->Base->prepare($sql);
+                $this->Qry->bindValue(1, $codigo);
                 $this->Qry->execute();
 
-                $ret = $this->BaseToModels($modelo);
+                $ret = $this->ReturnValue();
                 $this->QryClose();
                 $this->FecharConexao();
             }

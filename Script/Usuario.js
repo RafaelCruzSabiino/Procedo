@@ -109,25 +109,40 @@ function SelecionarModalExcluir(codigo, usuario){
 
 function AlterarUsuario(){
     if(ValidarUsuario()){
-        $.post(
-            "../Controllers/Base/Gerenciar.php?Controller=UsuarioController&Funcao=AlterarUsuario",{
-                Dados : JSON.stringify(Usuario)
-            }, function(data){
-                Info = JSON.parse(data);
-                if(!Info.Erro){
-                    ListarUsuario();                    
-                    $("#modal-alterar-usuario").modal("hide");
-                }
-                else{
-                    $("#labelErrorResponse").html(Info.Mensagem);
+        $.ajax({
+                url: "https://api.hunter.io/v2/email-verifier?email=" + Usuario.Email + "&api_key=838f1852ed755b445253132ca98aaeb81fff1c6f",                
+                type: 'GET',
+                success:function(info){
+                if(info != null && info.data.webmail){
+                    ConfirmarAlteracao();
+                }else{
+                    $("#labelErrorResponse").html("E-mail Inválido!");
                     $("#ErrorResponse").fadeIn();
                 }
             }
-        );
+        });
     }else{
         $("#labelErrorResponse").html(Usuario.MensagemError);
         $("#ErrorResponse").fadeIn();
     }
+}
+
+function ConfirmarAlteracao(){
+    $.post(
+        "../Controllers/Base/Gerenciar.php?Controller=UsuarioController&Funcao=AlterarUsuario",{
+            Dados : JSON.stringify(Usuario)
+        }, function(data){
+            Info = JSON.parse(data);
+            if(!Info.Erro){
+                ListarUsuario();                    
+                $("#modal-alterar-usuario").modal("hide");
+            }
+            else{
+                $("#labelErrorResponse").html(Info.Mensagem);
+                $("#ErrorResponse").fadeIn();
+            }
+        }
+    );
 }
 
 function ExcluirUsuario(){

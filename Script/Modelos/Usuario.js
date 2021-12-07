@@ -36,7 +36,7 @@ function ValidarUsuario(){
         return false
     }
 
-    if(!ValidarEmail(Usuario.Email)){ 
+    if(!ValidarEmailFormato(Usuario.Email)){ 
         Usuario.MensagemError = "Por favor Informe um E-mail Válido";
         return false;
     }

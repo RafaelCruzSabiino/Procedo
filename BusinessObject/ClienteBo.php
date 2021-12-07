@@ -1,16 +1,16 @@
 <?php
     /*<sumary>
-        Essa Pagina é responsável pela controle do objeto Usuario
+        Essa Pagina é responsável pela controle do objeto Cliente
     </sumary>*/
 
     #region "Inclusao de todas as paginas necessarias"
 
     require_once("../../Entities/Base/ResultInfo.php");
-    require_once("../../DataObjectAccess/OrigemDao.php");
+    require_once("../../DataObjectAccess/ClienteDao.php");
 
     #endregion
 
-    class OrigemBo
+    class ClienteBo
     {
         public $Dao;
         public $ResultInfo;
@@ -19,28 +19,30 @@
 
         function __construct()
         {            
-            $this->Dao        = new OrigemDao();
+            $this->Dao        = new ClienteDao();
             $this->ResultInfo = new ResultInfo();
         }
 
         #endregion
+        
+        #region "Metodo Para Inserir Cliente"
 
-        #region "Metodo Para Inserir a relação de Origem"
-
-        public function InserirRelacaoOrigem($modelo)
+        public function InserirCliente($modelo)
         {
             try
             {    
-                $this->ResultInfo->setReturnInfo($this->Dao->InserirRelacaoOrigem($modelo));
+                $this->ResultInfo->setReturnInfo($this->Dao->InserirCliente($modelo));
 
                 if(empty($this->ResultInfo->getReturnInfo()) || $this->ResultInfo->getReturnInfo() <= 0)
                 {
-                    $this->ResultInfo->setErro(true);                  
+                    $this->ResultInfo->setErro(true);   
+                    $this->ResultInfo->setMensagem("Erro ao gravar Cliente!");                   
                 }
             }
             catch (Exception $e)
             {
                 $this->ResultInfo->setErro(true);
+                $this->ResultInfo->setMensagem($e->getMessage());
             }
 
             return $this->ResultInfo;
@@ -48,18 +50,18 @@
 
         #endregion
 
-        #region "Metodo Para Selecionar as origens"
+        #region "Metodo Para Excluir o Cliente"
 
-        public function SelecionarOrigem($modelo)
+        public function ExcluirCliente($codigo)
         {
             try
             {    
-                $this->ResultInfo->setItens($this->Dao->SelecionarOrigem($modelo));
+                $this->ResultInfo->setReturnInfo($this->Dao->ExcluirCliente($codigo));
 
-                if(empty($this->ResultInfo->getItens()))
+                if(empty($this->ResultInfo->getReturnInfo()) || $this->ResultInfo->getReturnInfo() <= 0)
                 {
                     $this->ResultInfo->setErro(true);   
-                    $this->ResultInfo->setMensagem("Origens Não Encontradas!");                   
+                    $this->ResultInfo->setMensagem("Erro ao excluir Cliente!");                   
                 }
             }
             catch (Exception $e)
