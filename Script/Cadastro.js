@@ -4,6 +4,7 @@ $(document).ready(function(){
 
 $("#CadastrarUsuario").on("click", function(){
     if(ValidarUsuario()){
+        $(this).attr("disabled", "disabled");
         $.ajax({
                 url: "https://api.hunter.io/v2/email-verifier?email=" + Usuario.Email + "&api_key=838f1852ed755b445253132ca98aaeb81fff1c6f",                
                 type: 'GET',
@@ -13,6 +14,7 @@ $("#CadastrarUsuario").on("click", function(){
                 }else{
                     $("#labelErrorResponse").html("E-mail Inválido!");
                     $("#ErrorResponseCadastro").fadeIn();
+                    $(this).removeAttr("disabled");
                 }
             }
         });  
@@ -34,6 +36,7 @@ function CadastrarUsuario(){
             else{
                 $("#labelErrorResponse").html(Info.Mensagem);
                 $("#ErrorResponseCadastro").fadeIn();
+                $("#CadastrarUsuario").removeAttr("disabled");
             }
         }
     );
