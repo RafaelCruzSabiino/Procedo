@@ -63,32 +63,5 @@
         }
 
         #endregion
-
-        #region "Método para segurar o autocimmit"
-
-        protected function InicarTransacao()
-        {
-            $this->Base->beginTransaction();
-        }
-
-        #endregion
-
-        #region "Método para executar o retrocesso do processo efetuado"
-
-        protected function Retroceder()
-        {
-            $this->Base->rollback();
-        }
-
-        #endregion
-
-        #region "Método para dar commit do processo efetuado"
-
-        protected function Commit()
-        {
-            $this->Base->commit();
-        }
-        
-        #endregion
     }
 ?>

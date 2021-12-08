@@ -13,6 +13,10 @@ function GetOrigem(idOrigem){
                     } 
                     
                     $("#" + idOrigem).select2({multiple: true});
+
+                    if(idOrigem != "Origem"){
+                        $("#" + idOrigem).val(null).trigger("change");
+                    }
                 }else{
                     alert("Error!");
                 }

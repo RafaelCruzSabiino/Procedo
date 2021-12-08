@@ -87,6 +87,7 @@
                 , ["IndiceBase" => "ESTADO"    ,     "IndiceClass" => "Estado"        ]
                 , ["IndiceBase" => "SITUACAO"  ,     "IndiceClass" => "Situacao"      ]
                 , ["IndiceBase" => "OBSERVACAO",     "IndiceClass" => "Observacao"    ]
+                , ["IndiceBase" => "ORIGEM"    ,     "IndiceClass" => "Origem"        ]
             );
         }
 

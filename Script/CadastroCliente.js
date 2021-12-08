@@ -4,7 +4,7 @@ $(document).ready(function(){
 });
 
 $("#CadastrarCliente").on("click", function(){
-    Cliente.Origem = $("#Origem").val();
+    Cliente.Origem = $("#Origem").val() == null ? "" :  $("#Origem").val().join(",");
 
     if(ValidarCliente()){
         $.ajax({

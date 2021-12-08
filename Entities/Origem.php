@@ -17,7 +17,7 @@
 
         #region "Construtor"
 
-        public function __construct($Codigo=0,$Descricao="",$Cliente="")
+        public function __construct($Codigo="",$Descricao="",$Cliente="")
         {
             $this->Codigo     = $Codigo;
             $this->Descricao  = $Descricao;

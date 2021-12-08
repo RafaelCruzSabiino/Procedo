@@ -5,14 +5,51 @@
 <div class="container">
     <h1 class="text-center">Clientes</h1>
     <br>
+    <div class="container" id="filtrosCliente" style="display:none;">
+        <div class="row">
+            <div class="col-sm-3">
+                <label>Nome:</label>                        
+                <input type="text" name="NomeFiltro" id="NomeFiltro" class="form-control" placeholder="Informe o Nome">                            
+            </div>
+            <div class="col-sm-2">
+                <label>Estado:</label>                        
+                <select name="EstadoFiltro" id="EstadoFiltro" class="form-control" required="required" onchange="FiltrarCidade('EstadoFiltro', 'CidadeFiltro')">
+                </select>                          
+            </div>
+            <div class="col-sm-3">
+                <label>Cidade:</label>                       
+                <select name="CidadeFiltro" id="CidadeFiltro" class="form-control" required="required">
+                </select>                           
+            </div>
+            <div class="col-sm-2">
+                <label>Situação:</label>                       
+                <select name="SituacaoFiltro" id="SituacaoFiltro" class="form-control" required="required">
+                    <option value="">Selecione</option>
+                    <option value="0">Inativo</option>
+                    <option value="1">Ativo</option>
+                </select>                           
+            </div>
+            <div class="col-sm-2">
+                <label>Origem:</label>                   
+                <select name="OrigemFiltro" id="OrigemFiltro" class="form-control" required="required">
+                </select>  
+            </div>
+        </div>    
+        <br>
+    </div>
     <div class="row" style="text-align: center;">
-        <div class="col-sm-4"></div>
-        <div class="col-sm-4">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-2">
+            <button type="button" class="btn btn-primary" id="filtrarCliente" onclick="ListarCliente()" style="width: 80%; display: none;">Filtrar <i class="fa fa-check"></i></button>
+        </div>
+        <div class="col-sm-2">
             <button type="button" class="btn btn-default" onclick="window.location = 'CadastroCliente.php'" style="width: 80%">Cadastrar</button>
         </div>
-        <div class="col-sm-4"></div>
+        <div class="col-sm-2">
+            <button type="button" class="btn btn-primary" onclick="AplicarFiltro('block')" id="btnFiltrar" style="width: 80%">Filtros</button>   
+        </div>
+        <div class="col-sm-3"></div>
     </div>
-    <br>
     <br>
     <div class="table-responsive">
         <table class="table table-hover" id="table-cliente">

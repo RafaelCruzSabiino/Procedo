@@ -37,7 +37,8 @@
 
         public function InserirCliente()
         {
-            $dados      = json_decode($_POST["Dados"]);            
+            $dados      = json_decode($_POST["Dados"]); 
+            $origem     = explode(",", $dados->Origem);   
             $modelo     = $this->Entity->MapToClass($this->Entity, $dados, 1);                       
             $retCliente = $this->Bo->InserirCliente($modelo);
 
@@ -45,12 +46,13 @@
             {
                 $this->OrigemEntity->setCliente($retCliente->getReturnInfo());
 
-                for($i=0; $i < Count($dados->Origem); $i++)
-                {
-                    $this->OrigemEntity->setCodigo($dados->Origem[$i]);                   
+                for($i=0; $i < Count($origem); $i++)
+                {            
+                    $this->OrigemEntity->setCodigo($origem[$i]);                   
                     $retOrigem = $this->OrigemBo->InserirRelacaoOrigem($this->OrigemEntity);
 
-                    if($retOrigem->getErro()){
+                    if($retOrigem->getErro())
+                    {
                         $this->Bo->ExcluirCliente($retCliente->getReturnInfo());
 
                         $retCliente->setErro(true);
@@ -60,7 +62,7 @@
                 }
             }
 
-            echo json_encode($retCliente);
+            echo json_encode($retOrigem);
         }
 
         #endregion
@@ -69,7 +71,8 @@
 
         public function AlterarCliente()
         {
-            $dados      = json_decode($_POST["Dados"]);            
+            $dados      = json_decode($_POST["Dados"]);  
+            $origem     = explode(",", $dados->Origem);          
             $modelo     = $this->Entity->MapToClass($this->Entity, $dados, 1);                       
             $retCliente = $this->Bo->AlterarCliente($modelo);
 
@@ -77,9 +80,9 @@
 
             $this->OrigemEntity->setCliente($modelo->getCodigo());
 
-            for($i=0; $i < Count($dados->Origem); $i++)
+            for($i=0; $i < Count($origem); $i++)
             {
-                $this->OrigemEntity->setCodigo($dados->Origem[$i]);                   
+                $this->OrigemEntity->setCodigo($origem[$i]);                   
                 $this->OrigemBo->InserirRelacaoOrigem($this->OrigemEntity);
             }
 
@@ -101,12 +104,15 @@
 
         public function ListarCliente()
         {
-            $ret = $this->Bo->ListarCliente($this->Entity);
+            $dados  = json_decode($_POST["Dados"]);
+            $modelo = $this->Entity->MapToClass($this->Entity, $dados, 1);
+            $ret    = $this->Bo->ListarCliente($modelo);
             $dataTable = [];
 
             if(!$ret->getErro())
             {                
-                for($i=0; $i < Count($ret->getItens()); $i++){
+                for($i=0; $i < Count($ret->getItens()); $i++)
+                {
                     $dataRow = [];
                     array_push($dataRow, $ret->getItens()[$i]->Nome);
                     array_push($dataRow, $ret->getItens()[$i]->Email);

@@ -4,7 +4,28 @@ $(document).ready(function(){
     GetEstados();
 });
 
+function AplicarFiltro(css){
+    if(css != "none"){
+        $("#btnFiltrar").html("").append("Cancelar <i class='fa fa-times'></i>").removeClass("btn-primary").addClass("btn-danger").attr("onclick", "AplicarFiltro('none')");      
+    }else{
+        $("#btnFiltrar").html("").append("Filtros").removeClass("btn-danger").addClass("btn-primary").attr("onclick", "AplicarFiltro('block')");
+    }
+
+    if($("#EstadoFiltro").val() == null){
+        GetEstados('EstadoFiltro', 'CidadeFiltro');
+        GetOrigem('OrigemFiltro');
+    }
+
+    $("#filtrosCliente, #filtrarCliente").css("display", css);
+};
+
 function ListarCliente(){
+    Cliente.Nome     = $("#NomeFiltro").val();
+    Cliente.Estado   = $("#EstadoFiltro").val();
+    Cliente.Cidade   = $("#CidadeFiltro").val();
+    Cliente.Situacao = $("#SituacaoFiltro").val();
+    Cliente.Origem   = ($("#OrigemFiltro").val() == null ? "" : $("#OrigemFiltro").val().join(","));
+
     if ($.fn.dataTable.isDataTable("#table-cliente")) {
         $("#table-cliente").DataTable().destroy();
     }
@@ -12,6 +33,8 @@ function ListarCliente(){
     $('#table-cliente').DataTable({ 
         ajax: {
             url: "../Controllers/Base/Gerenciar.php?Controller=ClienteController&Funcao=ListarCliente",
+            type: "POST",
+            data: { Dados: JSON.stringify(Cliente) },
             dataSrc: ''
         },
         language: LanguageDefault()
@@ -24,7 +47,6 @@ function GetCliente(){
             "../Controllers/Base/Gerenciar.php?Controller=ClienteController&Funcao=GetCliente",{
                 Codigo : Cliente.Codigo
             }, function(data){
-                debugger;
                 Info = JSON.parse(data);
                 if(!Info.Erro){
                     var origem = [];
@@ -75,7 +97,7 @@ function SelecionarModalExcluir(codigo, usuario){
 }
 
 function AlterarCliente(){
-    Cliente.Origem = $("#Origem").val();
+    Cliente.Origem = $("#Origem").val() == null ? "" :  $("#Origem").val().join(",");
 
     if(ValidarCliente()){
         $.ajax({

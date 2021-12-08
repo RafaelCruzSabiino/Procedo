@@ -117,12 +117,17 @@
 
         public function ListarCliente($modelo)
         {
-            $sql = "CALL PROCEDO_CLIENTE_0005()";
+            $sql = "CALL PROCEDO_CLIENTE_0005(?,?,?,?,?)";
 
             try
             {
                 $this->AbrirConexao();
                 $this->Qry = $this->Base->prepare($sql);
+                $this->Qry->bindValue(1, $modelo->getEstado()   == ""  ? null : $modelo->getEstado());
+                $this->Qry->bindValue(2, $modelo->getCidade()   == ""  ? null : $modelo->getCidade());
+                $this->Qry->bindValue(3, $modelo->getNome()     == ""  ? null : $modelo->getNome());
+                $this->Qry->bindValue(4, $modelo->getSituacao() == "" ? null : $modelo->getSituacao());
+                $this->Qry->bindValue(5, $modelo->getOrigem() == "" ? null : $modelo->getOrigem());
                 $this->Qry->execute();
 
                 $ret = $this->BaseToModels($modelo);
