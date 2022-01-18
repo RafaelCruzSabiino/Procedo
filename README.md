@@ -1,2 +1,2 @@
-# Procedo
-Teste de Login e Cadastro de Usuário Procedo
+# XDEventos
+Teste de Login e Cadastro de Usuário XDEventos
